@@ -1,0 +1,34 @@
+hostname R1
+!
+interface GigabitEthernet0/0
+ ip address 172.17.25.2 255.255.255.252
+ no shutdown
+!
+interface GigabitEthernet0/1
+ no ip address
+ no shutdown
+!
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 172.17.10.1 255.255.255.0
+!
+interface GigabitEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 172.17.20.1 255.255.255.0
+!
+interface GigabitEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 172.17.30.1 255.255.255.0
+!
+interface GigabitEthernet0/1.88
+ encapsulation dot1Q 88 native
+ ip address 172.17.88.1 255.255.255.0
+!
+interface GigabitEthernet0/1.99
+ encapsulation dot1Q 99
+ ip address 172.17.99.1 255.255.255.0
+!
+! Assumption: next hop 172.17.25.1 is the other end of the /30 link
+ip route 172.17.50.0 255.255.255.0 172.17.25.1
+!
+end

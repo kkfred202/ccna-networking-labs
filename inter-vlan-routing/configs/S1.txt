@@ -1,0 +1,42 @@
+hostname S1
+!
+vlan 10
+ name Faculty/Staff
+vlan 20
+ name Students
+vlan 30
+ name Guest(Default)
+vlan 88
+ name Native
+vlan 99
+ name Management
+!
+interface Vlan99
+ ip address 172.17.99.10 255.255.255.0
+ no shutdown
+!
+ip default-gateway 172.17.99.1
+!
+interface range FastEthernet0/11 - 17
+ switchport mode access
+ switchport access vlan 10
+!
+interface range FastEthernet0/18 - 24
+ switchport mode access
+ switchport access vlan 20
+!
+interface range FastEthernet0/6 - 10
+ switchport mode access
+ switchport access vlan 30
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk native vlan 88
+!
+interface range FastEthernet0/1 - 5
+ shutdown
+!
+interface GigabitEthernet0/2
+ shutdown
+!
+end
